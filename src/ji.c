@@ -2,8 +2,6 @@
 
 int main(){
 
-	printf("hi");
-
+	printf("ji");
 	return 0;
-
 }
