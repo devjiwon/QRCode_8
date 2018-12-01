@@ -3,7 +3,7 @@ QRCode
 
 A simple library for generating [QR codes](https://en.wikipedia.org/wiki/QR_code) in C,
 optimized for processing and memory constrained systems.
-
+hi hi 
 **Features:**
 
 - Stack-based (no heap necessary; but you can use heap if you want)
