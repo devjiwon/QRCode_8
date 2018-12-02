@@ -34,9 +34,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+<<<<<<< HEAD
 
 bool isAlphanumeric(const char *text, uint16_t length);
 bool isNumeric(const char *text, uint16_t length);
+uint32_t getPenaltyScore(BitBucket *modules);
+
+>>>>>>> divide_penalty
 
 #pragma mark - Error Correction Lookup tables
 
@@ -97,9 +101,9 @@ static int max(int a, int b) {
 static int abs(int value) {
     if (value < 0) { return -value; }
     return value;
+<<<<<<< HEAD
 }
 */
-
 
 
 #pragma mark - BitBucket
@@ -409,6 +413,10 @@ static void drawCodewords(BitBucket *modules, BitBucket *isFunction, BitBucket *
 
 
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> divide_penalty
 
 
 #pragma mark - Reed-Solomon Generator
