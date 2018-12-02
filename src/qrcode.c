@@ -34,6 +34,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+uint32_t getPenaltyScore(BitBucket *modules);
+
+
 #pragma mark - Error Correction Lookup tables
 
 #if LOCK_VERSION == 0
