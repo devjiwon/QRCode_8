@@ -35,12 +35,17 @@
 #include <string.h>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 bool isAlphanumeric(const char *text, uint16_t length);
 bool isNumeric(const char *text, uint16_t length);
 uint32_t getPenaltyScore(BitBucket *modules);
 
 >>>>>>> divide_penalty
+=======
+
+char getModeBits(uint8_t version, uint8_t mode);
+>>>>>>> divide_counting
 
 #pragma mark - Error Correction Lookup tables
 
@@ -106,6 +111,14 @@ static int abs(int value) {
 */
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> divide_counting
 #pragma mark - BitBucket
 
 typedef struct BitBucket {
@@ -717,5 +730,4 @@ uint8_t qrcode_getHexLength(QRCode *qrcode) {
 
 void qrcode_getHex(QRCode *qrcode, char *result) {
     
-}
-*/
+}*/
