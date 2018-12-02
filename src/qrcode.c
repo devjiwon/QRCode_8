@@ -37,6 +37,10 @@
 
 bool isAlphanumeric(const char *text, uint16_t length);
 bool isNumeric(const char *text, uint16_t length);
+<<<<<<< .merge_file_a07500
+=======
+char getModeBits(uint8_t version, uint8_t mode);
+>>>>>>> .merge_file_a09224
 
 #pragma mark - Error Correction Lookup tables
 
@@ -103,6 +107,7 @@ static int abs(int value) {
 
 
 
+<<<<<<< .merge_file_a07500
 #pragma mark - Counting
 
 // We store the following tightly packed (less 8) in modeInfo
@@ -128,6 +133,9 @@ static char getModeBits(uint8_t version, uint8_t mode) {
     
     return result;
 }
+=======
+
+>>>>>>> .merge_file_a09224
 
 
 #pragma mark - BitBucket
