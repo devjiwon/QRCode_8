@@ -129,8 +129,6 @@ uint32_t getPenaltyScore(BitBucket *modules) {
 		}
 	}
 
-	
-
 	// Find smallest k such that (45-5k)% <= dark/total <= (55+5k)%
 	uint16_t total = size * size;
 	for (uint16_t k = 0; black * 20 < (9 - k) * total || black * 20 > (11 + k) * total; k++) {
