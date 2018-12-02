@@ -34,6 +34,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+bool isAlphanumeric(const char *text, uint16_t length);
+bool isNumeric(const char *text, uint16_t length);
+char getModeBits(uint8_t version, uint8_t mode);
+
 #pragma mark - Error Correction Lookup tables
 
 #if LOCK_VERSION == 0
@@ -97,70 +102,9 @@ static int abs(int value) {
 */
 
 
-#pragma mark - Mode testing and conversion
-
-static int8_t getAlphanumeric(char c) {
-    
-    if (c >= '0' && c <= '9') { return (c - '0'); }
-    if (c >= 'A' && c <= 'Z') { return (c - 'A' + 10); }
-    
-    switch (c) {
-        case ' ': return 36;
-        case '$': return 37;
-        case '%': return 38;
-        case '*': return 39;
-        case '+': return 40;
-        case '-': return 41;
-        case '.': return 42;
-        case '/': return 43;
-        case ':': return 44;
-    }
-    
-    return -1;
-}
-
-static bool isAlphanumeric(const char *text, uint16_t length) {
-    while (length != 0) {
-        if (getAlphanumeric(text[--length]) == -1) { return false; }
-    }
-    return true;
-}
 
 
-static bool isNumeric(const char *text, uint16_t length) {
-    while (length != 0) {
-        char c = text[--length];
-        if (c < '0' || c > '9') { return false; }
-    }
-    return true;
-}
 
-
-#pragma mark - Counting
-
-// We store the following tightly packed (less 8) in modeInfo
-//               <=9  <=26  <= 40
-// NUMERIC      ( 10,   12,    14);
-// ALPHANUMERIC (  9,   11,    13);
-// BYTE         (  8,   16,    16);
-static char getModeBits(uint8_t version, uint8_t mode) {
-    // Note: We use 15 instead of 16; since 15 doesn't exist and we cannot store 16 (8 + 8) in 3 bits
-    // hex(int("".join(reversed([('00' + bin(x - 8)[2:])[-3:] for x in [10, 9, 8, 12, 11, 15, 14, 13, 15]])), 2))
-    unsigned int modeInfo = 0x7bbb80a;
-    
-#if LOCK_VERSION == 0 || LOCK_VERSION > 9
-    if (version > 9) { modeInfo >>= 9; }
-#endif
-    
-#if LOCK_VERSION == 0 || LOCK_VERSION > 26
-    if (version > 26) { modeInfo >>= 9; }
-#endif
-    
-    char result = 8 + ((modeInfo >> (3 * mode)) & 0x07);
-    if (result == 15) { result = 16; }
-    
-    return result;
-}
 
 
 #pragma mark - BitBucket
