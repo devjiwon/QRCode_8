@@ -1,0 +1,182 @@
+* commit 1a6888e251101a05349fccbc5d6ff19a396d80f0
+| Author: jiwon <wldnjs5818@naver.com>
+| Date:   Mon Dec 3 21:40:24 2018 +0900
+| 
+|     rm history_log.txt
+| 
+* commit 3dba33164de90353bf2e9e854a728de33fd6e5b1
+| Author: jiwon <wldnjs5818@naver.com>
+| Date:   Mon Dec 3 21:05:34 2018 +0900
+| 
+|     bitbucket, rsgenerator
+| 
+* commit b7798ab7f5ff674b235c724d17f814f11465e386
+| Author: jiwon <wldnjs5818@naver.com>
+| Date:   Mon Dec 3 19:52:48 2018 +0900
+| 
+|     qr func revise
+| 
+* commit cb61ad914513da2db3d6247f902f41041bd7e514
+| Author: jiwon <wldnjs5818@naver.com>
+| Date:   Mon Dec 3 19:41:26 2018 +0900
+| 
+|     public qrcode func
+| 
+* commit 3d3c4a03394f37225a98a60d73a0af8e6c23824e
+| Author: 이지원 <jiwon@ijiwon-ui-MacBook-Pro.local>
+| Date:   Mon Dec 3 19:33:57 2018 +0900
+| 
+|     qrcode.c public jiwon
+| 
+* commit 7a81df2ee9480cef88fbb97e5e6a09370a759838
+| Author: dpwls2215 <dpwls2215@naver.com>
+| Date:   Mon Dec 3 17:00:57 2018 +0900
+| 
+|     all modified
+| 
+* commit 0d8bb52a3172d8c209bb120afcd7038f770cabb3
+| Author: dpwls2215 <dpwls2215@naver.com>
+| Date:   Mon Dec 3 16:46:47 2018 +0900
+| 
+|     QRcodefun.c modified
+| 
+* commit 26423d1f0719833f883f5cbfb7f5bf7960f93453
+| Author: dpwls2215 <dpwls2215@naver.com>
+| Date:   Mon Dec 3 16:42:39 2018 +0900
+| 
+|     qrcode.c modified
+| 
+* commit c5a19fe5901adab1ec150098efe6faa1278f3a0d
+| Author: dpwls2215 <dpwls2215@naver.com>
+| Date:   Mon Dec 3 15:07:45 2018 +0900
+| 
+|     QRcode function
+| 
+* commit ce5b67a94c204474b08e8413e2291499ed4e6c0b
+| Author: sorosong <hyeonwoos2185@gmail.com>
+| Date:   Mon Dec 3 01:36:15 2018 +0900
+| 
+|     divide draw
+|   
+*   commit 02f102ca3a793bab2abbd9b9250c986be2b28b97
+|\  Merge: 3b99af2 a205188
+| | Author: dpwls2215 <dpwls2215@naver.com>
+| | Date:   Sun Dec 2 11:51:18 2018 +0900
+| | 
+| |     master and divide_counting
+| |   
+| *   commit a2051887f4426395441d464e099ed4853dcf31a4
+| |\  Merge: 9f3800d 649d186
+| | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | Date:   Sun Dec 2 10:22:54 2018 +0900
+| | | 
+| | |     Merge branch 'divide_penalty' into divide_counting
+| | |   
+| * |   commit 9f3800d5490db3bdaa6e4910ea7ebd7c80b240d1
+| |\ \  Merge: 667ff65 fd439cb
+| | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | Date:   Sun Dec 2 10:18:50 2018 +0900
+| | | | 
+| | | |     Merge branch 'divide_penalty' into divide_counting
+| | | | 
+| * | | commit 667ff654bf6c0aca74668afada0b7a11511375db
+| | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | Date:   Sun Dec 2 09:40:48 2018 +0900
+| | | | 
+| | | |     divide counting
+| | | |   
+* | | |   commit 3b99af2ff7acd227e54ca4b92af7b2c48684b5f0
+|\ \ \ \  Merge: 1cf90b9 8ceda37
+| | | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | | Date:   Sun Dec 2 11:47:24 2018 +0900
+| | | | | 
+| | | | |     change
+| | | | | 
+| * | | | commit 8ceda37dbe5d8afb8a58c0f77675b3ecd6405351
+| | | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | | Date:   Sun Dec 2 11:39:53 2018 +0900
+| | | | | 
+| | | | |     divide_penalty modify1
+| | | | | 
+| * | | | commit ebdfacb27c0efcc60665d27eccdb6464c0f84b14
+| | |_|/  Author: dpwls2215 <dpwls2215@naver.com>
+| |/| |   Date:   Sun Dec 2 10:59:44 2018 +0900
+| | | |   
+| | | |       divide_penalty modify
+| | | | 
+* | | | commit 1cf90b93a839016c191b40e688008d77f2899dc3
+| | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | Date:   Sun Dec 2 11:11:55 2018 +0900
+| | | | 
+| | | |     qrcode.c modify2
+| | | | 
+* | | | commit 6ecaa5b825b933cd4b790a8b75adb7d34fe56e3c
+| | | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | | Date:   Sun Dec 2 11:09:00 2018 +0900
+| | | | 
+| | | |     qrcode.c modify
+| | | |   
+* | | |   commit 605c0a4a4ccd0dd15e7c378c21e69bb6b17fb0a7
+|\ \ \ \  Merge: 6a5470f 649d186
+| |/ / /  Author: dpwls2215 <dpwls2215@naver.com>
+| | | |   Date:   Sun Dec 2 10:49:34 2018 +0900
+| | | |   
+| | | |       Merge branch 'divide_penalty'
+| | | | 
+| * | | commit 649d186e23274ada89c3697e2d249c9a94baef2a
+| | |/  Author: dpwls2215 <dpwls2215@naver.com>
+| |/|   Date:   Sun Dec 2 10:21:56 2018 +0900
+| | |   
+| | |       penalty file modify
+| | | 
+* | | commit 6a5470f4212d0ded58f5291d26aec69c428ea48a
+| | | Author: dpwls2215 <dpwls2215@naver.com>
+| | | Date:   Sun Dec 2 10:40:15 2018 +0900
+| | | 
+| | |     command.txt modify
+| | |   
+* | |   commit 1dcf4a4b84066be17da521deb053a68c33e1a12a
+|\ \ \  Merge: 09cd0b6 fd439cb
+| |/ /  Author: dpwls2215 <dpwls2215@naver.com>
+| | |   Date:   Sun Dec 2 10:16:52 2018 +0900
+| | |   
+| | |       Merge branch 'divide_penalty'
+| | | 
+| * | commit fd439cb4f8aa80c42373e95702c0dc3612f9ae15
+| |/  Author: dpwls2215 <dpwls2215@naver.com>
+| |   Date:   Sun Dec 2 09:46:50 2018 +0900
+| |   
+| |       divide penalty
+| | 
+* | commit 09cd0b62745a5e983c0b102e4cff478e3a9ec6c1
+| | Author: dpwls2215 <dpwls2215@naver.com>
+| | Date:   Sun Dec 2 10:16:05 2018 +0900
+| | 
+| |     counting add
+| |   
+* |   commit 369852821c23ac6dfadf889141c8184d06a344ef
+|\ \  Merge: ea79045 cd8d8a7
+| |/  Author: dpwls2215 <dpwls2215@naver.com>
+|/|   Date:   Sun Dec 2 10:04:27 2018 +0900
+| |   
+| |       Merge branch 'divide_modetest'
+| |       
+| |       마스터에 모드테스트 합침
+| | 
+| * commit cd8d8a783c923065420ada16ddd0c91eddfb2a24
+| | Author: dpwls2215 <dpwls2215@naver.com>
+| | Date:   Sun Dec 2 09:30:11 2018 +0900
+| | 
+| |     divide mode_test modification
+| | 
+* | commit ea79045e57f33ae8a1f3ca82cd35630c46c131e4
+|/  Author: dpwls2215 <dpwls2215@naver.com>
+|   Date:   Sun Dec 2 09:25:33 2018 +0900
+|   
+|       divide mode_test
+| 
+* commit b61231ad1fec0ab9c9d73d2492d41a5619e83783
+  Author: 이지원 <jiwon@ijiwon-ui-MacBook-Pro.local>
+  Date:   Sat Dec 1 20:32:59 2018 +0900
+  
+      init
