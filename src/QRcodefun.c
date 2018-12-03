@@ -35,6 +35,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+bool isAlphanumeric(const char *text, uint16_t length);
+bool isNumeric(const char *text, uint16_t length);
+char getModeBits(uint8_t version, uint8_t mode);
+
 #pragma mark - QrCode
 
 int8_t encodeDataCodewords(BitBucket *dataCodewords, const uint8_t *text, uint16_t length, uint8_t version) {

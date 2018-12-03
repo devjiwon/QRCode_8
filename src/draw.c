@@ -41,7 +41,7 @@
 // properties, calling applyMask(m) twice with the same value is equivalent to no change at all.
 // This means it is possible to apply a mask, undo it, and try another mask. Note that a final
 // well-formed QR Code symbol needs exactly one mask applied (not zero, not two, etc.).
-static void applyMask(BitBucket *modules, BitBucket *isFunction, uint8_t mask) {
+void applyMask(BitBucket *modules, BitBucket *isFunction, uint8_t mask) {
     uint8_t size = modules->bitOffsetOrWidth;
     
     for (uint8_t y = 0; y < size; y++) {
@@ -95,7 +95,7 @@ static void drawAlignmentPattern(BitBucket *modules, BitBucket *isFunction, uint
 
 // Draws two copies of the format bits (with its own error correction code)
 // based on the given mask and this object's error correction level field.
-static void drawFormatBits(BitBucket *modules, BitBucket *isFunction, uint8_t ecc, uint8_t mask) {
+void drawFormatBits(BitBucket *modules, BitBucket *isFunction, uint8_t ecc, uint8_t mask) {
     
     uint8_t size = modules->bitOffsetOrWidth;
 
@@ -166,7 +166,7 @@ static void drawVersion(BitBucket *modules, BitBucket *isFunction, uint8_t versi
 #endif
 }
 
-static void drawFunctionPatterns(BitBucket *modules, BitBucket *isFunction, uint8_t version, uint8_t ecc) {
+void drawFunctionPatterns(BitBucket *modules, BitBucket *isFunction, uint8_t version, uint8_t ecc) {
     
     uint8_t size = modules->bitOffsetOrWidth;
 
@@ -226,7 +226,7 @@ static void drawFunctionPatterns(BitBucket *modules, BitBucket *isFunction, uint
 
 // Draws the given sequence of 8-bit codewords (data and error correction) onto the entire
 // data area of this QR Code symbol. Function modules need to be marked off before this is called.
-static void drawCodewords(BitBucket *modules, BitBucket *isFunction, BitBucket *codewords) {
+void drawCodewords(BitBucket *modules, BitBucket *isFunction, BitBucket *codewords) {
     
     uint32_t bitLength = codewords->bitOffsetOrWidth;
     uint8_t *data = codewords->data;

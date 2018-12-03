@@ -35,10 +35,12 @@
 #include <string.h>
 
 
-bool isAlphanumeric(const char *text, uint16_t length);
-bool isNumeric(const char *text, uint16_t length);
 uint32_t getPenaltyScore(BitBucket *modules);
-char getModeBits(uint8_t version, uint8_t mode);
+void applyMask(BitBucket *modules, BitBucket *isFunction, uint8_t mask);
+void drawFormatBits(BitBucket *modules, BitBucket *isFunction, uint8_t ecc, uint8_t mask);
+void drawFunctionPatterns(BitBucket *modules, BitBucket *isFunction, uint8_t version, uint8_t ecc);
+void drawCodewords(BitBucket *modules, BitBucket *isFunction, BitBucket *codewords);
+
 
 #pragma mark - Error Correction Lookup tables
 
