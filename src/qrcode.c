@@ -307,36 +307,36 @@ int8_t qrcode_initBytes(QRCode *qrcode, uint8_t *modules, uint8_t version, uint8
     BitBucket modulesGrid;
     bb_initGrid(&modulesGrid, modules, size);
     
-    BitBucket isFunctionGrid;
+    BitBucket isFuncGrid; // isFunctionGrid -> isFuncGrid
     uint8_t isFunctionGridBytes[bb_getGridSizeBytes(size)];
-    bb_initGrid(&isFunctionGrid, isFunctionGridBytes, size);
+    bb_initGrid(&isFuncGrid, isFunctionGridBytes, size);
     
     // Draw function patterns, draw all codewords, do masking
-    drawFunctionPatterns(&modulesGrid, &isFunctionGrid, version, eccFormatBits);
+    drawFunctionPatterns(&modulesGrid, &isFuncGrid, version, eccFormatBits);
     performErrorCorrection(version, eccFormatBits, &codewords);
-    drawCodewords(&modulesGrid, &isFunctionGrid, &codewords);
+    drawCodewords(&modulesGrid, &isFuncGrid, &codewords);
     
     // Find the best (lowest penalty) mask
     uint8_t mask = 0;
     int32_t minPenalty = INT32_MAX;
     for (uint8_t i = 0; i < 8; i++) {
-        drawFormatBits(&modulesGrid, &isFunctionGrid, eccFormatBits, i);
-        applyMask(&modulesGrid, &isFunctionGrid, i);
+        drawFormatBits(&modulesGrid, &isFuncGrid, eccFormatBits, i);
+        applyMask(&modulesGrid, &isFuncGrid, i);
         int penalty = getPenaltyScore(&modulesGrid);
         if (penalty < minPenalty) {
             mask = i;
             minPenalty = penalty;
         }
-        applyMask(&modulesGrid, &isFunctionGrid, i);  // Undoes the mask due to XOR
+        applyMask(&modulesGrid, &isFuncGrid, i);  // Undoes the mask due to XOR
     }
     
     qrcode->mask = mask;
     
     // Overwrite old format bits
-    drawFormatBits(&modulesGrid, &isFunctionGrid, eccFormatBits, mask);
+    drawFormatBits(&modulesGrid, &isFuncGrid, eccFormatBits, mask);
     
     // Apply the final choice of mask
-    applyMask(&modulesGrid, &isFunctionGrid, mask);
+    applyMask(&modulesGrid, &isFuncGrid, mask);
 
     return 0;
 }
