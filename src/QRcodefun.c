@@ -37,7 +37,7 @@
 
 #pragma mark - QrCode
 
-=int8_t encodeDataCodewords(BitBucket *dataCodewords, const uint8_t *text, uint16_t length, uint8_t version) {
+int8_t encodeDataCodewords(BitBucket *dataCodewords, const uint8_t *text, uint16_t length, uint8_t version) {
 	int8_t mode = MODE_BYTE;
 
 	if (isNumeric((char*)text, length)) {
