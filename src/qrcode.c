@@ -336,7 +336,7 @@ int8_t qrcode_initBytes(QRCode *qrcode, uint8_t *modules, uint8_t version, uint8
     drawFormatBits(&modulesGrid, &isFuncGrid, eccFormatBits, mask);
     
     // Apply the final choice of mask
-    applyMask(&modulesGrid, &isFuncGrid, mask);
+    applyMask(&modulesGrid, &isFuncGrid, mask); //
 
     return 0;
 }
