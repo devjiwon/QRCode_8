@@ -40,7 +40,23 @@ void applyMask(BitBucket *modules, BitBucket *isFunction, uint8_t mask);
 void drawFormatBits(BitBucket *modules, BitBucket *isFunction, uint8_t ecc, uint8_t mask);
 void drawFunctionPatterns(BitBucket *modules, BitBucket *isFunction, uint8_t version, uint8_t ecc);
 void drawCodewords(BitBucket *modules, BitBucket *isFunction, BitBucket *codewords);
+uint8_t rs_multiply(uint8_t x, uint8_t y);
+void rs_init(uint8_t degree, uint8_t *coeff);
+void rs_getRemainder(uint8_t degree, uint8_t *coeff, uint8_t *data, uint8_t length, uint8_t *result, uint8_t stride);
+uint16_t bb_getGridSizeBytes(uint8_t size);
+uint16_t bb_getBufferSizeBytes(uint32_t bits);
+void bb_initBuffer(BitBucket *bitBuffer, uint8_t *data, int32_t capacityBytes);
+void bb_initGrid(BitBucket *bitGrid, uint8_t *data, uint8_t size);
+void bb_appendBits(BitBucket *bitBuffer, uint32_t val, uint8_t length);
+void bb_setBit(BitBucket *bitGrid, uint8_t x, uint8_t y, bool on);
+void bb_invertBit(BitBucket *bitGrid, uint8_t x, uint8_t y, bool invert);
+bool bb_getBit(BitBucket *bitGrid, uint8_t x, uint8_t y);
 
+typedef struct BitBucket {
+    uint32_t bitOffsetOrWidth;
+    uint16_t capacityBytes;
+    uint8_t *data;
+} BitBucket;
 
 #pragma mark - Error Correction Lookup tables
 
@@ -96,167 +112,6 @@ static int max(int a, int b) {
     if (a > b) { return a; }
     return b;
 }
-
-/*
-static int abs(int value) {
-    if (value < 0) { return -value; }
-    return value;
-<<<<<<< HEAD
-}
-*/
-
-
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> divide_counting
-#pragma mark - BitBucket
-
-typedef struct BitBucket {
-    uint32_t bitOffsetOrWidth;
-    uint16_t capacityBytes;
-    uint8_t *data;
-} BitBucket;
-
-/*
-void bb_dump(BitBucket *bitBuffer) {
-    printf("Buffer: ");
-    for (uint32_t i = 0; i < bitBuffer->capacityBytes; i++) {
-        printf("%02x", bitBuffer->data[i]);
-        if ((i % 4) == 3) { printf(" "); }
-    }
-    printf("\n");
-}
-*/
-
-static uint16_t bb_getGridSizeBytes(uint8_t size) {
-    return (((size * size) + 7) / 8);
-}
-
-static uint16_t bb_getBufferSizeBytes(uint32_t bits) {
-    return ((bits + 7) / 8);
-}
-
-static void bb_initBuffer(BitBucket *bitBuffer, uint8_t *data, int32_t capacityBytes) {
-    bitBuffer->bitOffsetOrWidth = 0;
-    bitBuffer->capacityBytes = capacityBytes;
-    bitBuffer->data = data;
-    
-    memset(data, 0, bitBuffer->capacityBytes);
-}
-
-static void bb_initGrid(BitBucket *bitGrid, uint8_t *data, uint8_t size) {
-    bitGrid->bitOffsetOrWidth = size;
-    bitGrid->capacityBytes = bb_getGridSizeBytes(size);
-    bitGrid->data = data;
-
-    memset(data, 0, bitGrid->capacityBytes);
-}
-
-static void bb_appendBits(BitBucket *bitBuffer, uint32_t val, uint8_t length) {
-    uint32_t offset = bitBuffer->bitOffsetOrWidth;
-    for (int8_t i = length - 1; i >= 0; i--, offset++) {
-        bitBuffer->data[offset >> 3] |= ((val >> i) & 1) << (7 - (offset & 7));
-    }
-    bitBuffer->bitOffsetOrWidth = offset;
-}
-/*
-void bb_setBits(BitBucket *bitBuffer, uint32_t val, int offset, uint8_t length) {
-    for (int8_t i = length - 1; i >= 0; i--, offset++) {
-        bitBuffer->data[offset >> 3] |= ((val >> i) & 1) << (7 - (offset & 7));
-    }
-}
-*/
-static void bb_setBit(BitBucket *bitGrid, uint8_t x, uint8_t y, bool on) {
-    uint32_t offset = y * bitGrid->bitOffsetOrWidth + x;
-    uint8_t mask = 1 << (7 - (offset & 0x07));
-    if (on) {
-        bitGrid->data[offset >> 3] |= mask;
-    } else {
-        bitGrid->data[offset >> 3] &= ~mask;
-    }
-}
-
-static void bb_invertBit(BitBucket *bitGrid, uint8_t x, uint8_t y, bool invert) {
-    uint32_t offset = y * bitGrid->bitOffsetOrWidth + x;
-    uint8_t mask = 1 << (7 - (offset & 0x07));
-    bool on = ((bitGrid->data[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0);
-    if (on ^ invert) {
-        bitGrid->data[offset >> 3] |= mask;
-    } else {
-        bitGrid->data[offset >> 3] &= ~mask;
-    }
-}
-
-static bool bb_getBit(BitBucket *bitGrid, uint8_t x, uint8_t y) {
-    uint32_t offset = y * bitGrid->bitOffsetOrWidth + x;
-    return (bitGrid->data[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0;
-}
-
-
-#pragma mark - Reed-Solomon Generator
-
-static uint8_t rs_multiply(uint8_t x, uint8_t y) {
-    // Russian peasant multiplication
-    // See: https://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication
-    uint16_t z = 0;
-    for (int8_t i = 7; i >= 0; i--) {
-        z = (z << 1) ^ ((z >> 7) * 0x11D);
-        z ^= ((y >> i) & 1) * x;
-    }
-    return z;
-}
-
-static void rs_init(uint8_t degree, uint8_t *coeff) {
-    memset(coeff, 0, degree);
-    coeff[degree - 1] = 1;
-    
-    // Compute the product polynomial (x - r^0) * (x - r^1) * (x - r^2) * ... * (x - r^{degree-1}),
-    // drop the highest term, and store the rest of the coefficients in order of descending powers.
-    // Note that r = 0x02, which is a generator element of this field GF(2^8/0x11D).
-    uint16_t root = 1;
-    for (uint8_t i = 0; i < degree; i++) {
-        // Multiply the current product by (x - r^i)
-        for (uint8_t j = 0; j < degree; j++) {
-            coeff[j] = rs_multiply(coeff[j], root);
-            if (j + 1 < degree) {
-                coeff[j] ^= coeff[j + 1];
-            }
-        }
-        root = (root << 1) ^ ((root >> 7) * 0x11D);  // Multiply by 0x02 mod GF(2^8/0x11D)
-    }
-}
-
-static void rs_getRemainder(uint8_t degree, uint8_t *coeff, uint8_t *data, uint8_t length, uint8_t *result, uint8_t stride) {
-    // Compute the remainder by performing polynomial division
-    
-    //for (uint8_t i = 0; i < degree; i++) { result[] = 0; }
-    //memset(result, 0, degree);
-    
-    for (uint8_t i = 0; i < length; i++) {
-        uint8_t factor = data[i] ^ result[0];
-        for (uint8_t j = 1; j < degree; j++) {
-            result[(j - 1) * stride] = result[j * stride];
-        }
-        result[(degree - 1) * stride] = 0;
-        
-        for (uint8_t j = 0; j < degree; j++) {
-            result[j * stride] ^= rs_multiply(coeff[j], factor);
-        }
-    }
-}
-
-
-
-
-// We store the Format bits tightly packed into a single byte (each of the 4 modes is 2 bits)
-// The format bits can be determined by ECC_FORMAT_BITS >> (2 * ecc)
-static const uint8_t ECC_FORMAT_BITS = (0x02 << 6) | (0x03 << 4) | (0x00 << 2) | (0x01 << 0);
-
 
 #pragma mark - Public QRCode functions
 
