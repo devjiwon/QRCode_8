@@ -308,8 +308,8 @@ int8_t qrcode_initBytes(QRCode *qrcode, uint8_t *modules, uint8_t version, uint8
     bb_initGrid(&modulesGrid, modules, size);
     
     BitBucket isFuncGrid; // isFunctionGrid -> isFuncGrid
-    uint8_t isFunctionGridBytes[bb_getGridSizeBytes(size)];
-    bb_initGrid(&isFuncGrid, isFunctionGridBytes, size);
+    uint8_t isFuncGridBytes[bb_getGridSizeBytes(size)]; //isFunctionGridBytes -> isFuncGridBytes
+    bb_initGrid(&isFuncGrid, isFuncGridBytes, size);
     
     // Draw function patterns, draw all codewords, do masking
     drawFunctionPatterns(&modulesGrid, &isFuncGrid, version, eccFormatBits);
@@ -351,7 +351,8 @@ bool qrcode_getModule(QRCode *qrcode, uint8_t x, uint8_t y) {
     }
 
     uint32_t offset = y * qrcode->size + x;
-    return (qrcode->modules[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0;
+    bool reResult = (qrcode->modules[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0;
+    return reResult;
 }
 
 /*
