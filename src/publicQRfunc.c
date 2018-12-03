@@ -133,6 +133,7 @@ bool qrcode_getModule(QRCode *qrcode, uint8_t x, uint8_t y) {
     uint32_t offset = y * qrcode->size + x;
     boolean result = (qrcode->modules[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0; // result 변수 만듬
 
+    // return (qrcode->modules[offset >> 3] & (1 << (7 - (offset & 0x07)))) != 0
     return result;
 }
 
