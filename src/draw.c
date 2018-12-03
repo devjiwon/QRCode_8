@@ -37,10 +37,15 @@
 
 #pragma mark - Drawing Patterns
 
-// XORs the data modules in this QR Code with the given mask pattern. Due to XOR's mathematical
-// properties, calling applyMask(m) twice with the same value is equivalent to no change at all.
-// This means it is possible to apply a mask, undo it, and try another mask. Note that a final
-// well-formed QR Code symbol needs exactly one mask applied (not zero, not two, etc.).
+/*
+ XORs the data modules in this QR Code with the given mask pattern.
+ Due to XOR's mathematical properties, calling applyMask(m) twice with the same value is equivalent to no change at all.
+This means it is possible to apply a mask, undo it, and try another mask.
+Note that a final well-formed QR Code symbol needs exactly one mask applied (not zero, not two, etc.)
+QR코드의 데이터 모듈을 지정된 마스크 패턴으로 만드는 함수이다.
+QR코드를 인코딩할 때 출력된 행렬을 변경하는 데 사용할 수 있는 8개의 마스크 패턴이 있는데, 각 마스크 패턴은 QR 코드 행렬의 좌표에 따라 수식을 사용하여 현재 비트의 색상을 변경할 지 여부를 결정한다.
+현재 비트의 좌표를 수식에 넣고 결과가 0이면 해당 죄표의 반대비트를 사용한다.
+*/
 void applyMask(BitBucket *modules, BitBucket *isFunction, uint8_t mask) {
     uint8_t size = modules->bitOffsetOrWidth;
     
@@ -69,7 +74,12 @@ static void setFunctionModule(BitBucket *modules, BitBucket *isFunction, uint8_t
     bb_setBit(isFunction, x, y, true);
 }
 
-// Draws a 9*9 finder pattern including the border separator, with the center module at (x, y).
+/* Draws a 9*9 finder pattern including the border separator, with the center module at (x, y).
+finder pattern은 qr코드 우측 하단 모서리를 제외한 나머지 3개의 모서리에 위치한다.
+검은색 모듈을  흰색 모듈이 둘러싸고 있고, 그 바깥쪽을 다시 검은색 모듈이 흰색 모듈을 둘러싸고 있다.
+seperator는 finder pattern 옆에 위치한 흰색 모듈들이다.
+finder pattern과 데이터 영역의 구분을 명확하게 해준다.
+ */
 static void drawFinderPattern(BitBucket *modules, BitBucket *isFunction, uint8_t x, uint8_t y) {
     uint8_t size = modules->bitOffsetOrWidth;
 
