@@ -75,6 +75,7 @@ static void setFunctionModule(BitBucket *modules, BitBucket *isFunction, uint8_t
 }
 
 /* Draws a 9*9 finder pattern including the border separator, with the center module at (x, y).
+가운데 위치한 모듈의 좌표를 이용해 finder patter과 seperator를 그린다.
 finder pattern은 qr코드 우측 하단 모서리를 제외한 나머지 3개의 모서리에 위치한다.
 검은색 모듈을  흰색 모듈이 둘러싸고 있고, 그 바깥쪽을 다시 검은색 모듈이 흰색 모듈을 둘러싸고 있다.
 seperator는 finder pattern 옆에 위치한 흰색 모듈들이다.
